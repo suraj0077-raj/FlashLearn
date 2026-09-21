@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlashLearn Pro</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo"><img src="favicon.svg" alt="logo"></div>
+      <div>
+        <div class="brand-row"><span class="brand-name">FlashLearn</span><span class="pro">PRO</span></div>
+        <div class="tagline">Smart 3D Flashcards</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="goal-pill">
+        <span class="target-icon">⭕</span>
+        <span>Daily Goal:</span>
+        <strong id="headerGoal">0</strong><span id="headerGoalLimit">/20</span>
+        <div class="mini-track"><span id="headerGoalBar"></span></div>
+      </div>
+      <div class="streak-pill"><span>🔥</span> <strong id="headerStreak">1</strong> Day Streak</div>
+      <button class="icon-btn" id="soundBtn" title="Toggle sound">🔊</button>
+      <button class="icon-btn" id="themeBtn" title="Toggle theme">☀️</button>
+    </div>
+  </header>
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-badge">✨ Smart Learning</span>
+
+        <h1>
+            Learn Smarter.
+            <span>Remember More.</span>
+        </h1>
+
+        <p>
+            Master anything with interactive 3D flashcards,
+            smart revision and daily learning goals.
+        </p>
+
+        <div class="hero-buttons">
+            <button class="btn-primary">▶ Start Learning</button>
+            <button class="btn-secondary">+ Create Deck</button>
+        </div>
+
+        <div class="hero-progress">
+            <div class="progress-text">
+                <span>Today's Progress</span>
+                <strong>10 / 20 cards</strong>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="hero-visual">
+
+        <!-- Background glow -->
+        <div class="hero-glow"></div>
+
+        <!-- Floating cards -->
+        <div class="mini-card mini-card-1">
+            JavaScript
+        </div>
+
+        <div class="mini-card mini-card-2">
+            DSA
+        </div>
+
+        <div class="mini-card mini-card-3">
+            History
+        </div>
+
+        <!-- Main Flashcard -->
+        <div class="flashcard">
+            <div class="flashcard-top">
+                <span>PROGRAMMING</span>
+                <span>3D</span>
+            </div>
+
+            <div class="flashcard-content">
+                <small>QUESTION</small>
+
+                <h2>
+                    What is<br>
+                    JavaScript?
+                </h2>
+
+                <p>Click to reveal answer</p>
+            </div>
+
+            <div class="flashcard-bottom">
+                <span>↻ Flip Card</span>
+                <span>01 / 20</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+  <main class="container">
+    <section class="stats-grid">
+      <article class="stat-card daily-goal-card" id="goalCard">
+        <div class="stat-head"><span>DAILY GOAL</span><span class="stat-icon purple">↗</span></div>
+        <div class="stat-value"><strong id="goalCount">0</strong><small>/ <span id="goalTotal">20</span> cards</small></div>
+        <div class="progress"><span id="goalBar"></span></div>
+        <div class="stat-foot"><span id="remaining">20 cards remaining</span><button id="editGoal">Edit Goal</button></div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-head"><span>CURRENT STREAK</span><span class="stat-icon orange">🔥</span></div>
+        <div class="stat-value"><strong id="streakCount">1</strong><small> days active 🔥</small></div>
+        <div class="subtext">Personal best: <b id="bestStreak">1 day</b></div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-head"><span>KNOWLEDGE LIBRARY</span><span class="stat-icon purple">📚</span></div>
+        <div class="stat-value"><strong id="deckCount">3</strong><small> Decks</small></div>
+        <div class="subtext"><b id="cardTotal">16</b> total flashcards created</div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-head"><span>OVERALL MASTERY</span><span class="stat-icon green">🏅</span></div>
+        <div class="stat-value"><strong id="mastery">0%</strong><small class="green-text"> mastered</small></div>
+        <div class="subtext"><b id="masteredCount" class="green-text">0</b> cards marked "Got it"</div>
+      </article>
+    </section>
+
+    <section class="decks-section">
+      <div class="section-title-row">
+        <div>
+          <h1>Your Study Decks</h1>
+          <p>Pick a deck to start a quick 3D practice session or create your own custom set.</p>
+        </div>
+        <div class="deck-actions">
+          <button class="outline-btn" id="importBtn">↥ <span>Import</span></button>
+          <button class="primary-btn" id="createBtn">＋ <span>Create Deck</span></button>
+          <input type="file" id="fileInput" accept=".json" hidden>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="All">All</button>
+          <button class="filter" data-filter="Programming">Programming</button>
+          <button class="filter" data-filter="Languages">Languages</button>
+          <button class="filter" data-filter="History">History</button>
+          <button class="filter" data-filter="General">General</button>
+        </div>
+        <label class="search">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search decks...">
+        </label>
+      </div>
+
+      <div class="deck-grid" id="deckGrid"></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modal"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <footer class="footer">
+    <div><span>© 2026 FlashLearn. All rights reserved. Made for smarter learning⚡</span></div>
+  </footer>
+  <script src="script.js"></script>
+
+</body>
+</html>
